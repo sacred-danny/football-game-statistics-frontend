@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 @import '~bootstrap/scss/bootstrap';
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}

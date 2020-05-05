@@ -1,0 +1,41 @@
+<div class="table">
+  <div class="table-header">
+    <div class="table-header-group" *ngFor="let group of columns" [style.width]="group.width" [class.flex-grow-1]="!group.width">
+      <span class="group-header" *ngIf="group.headerText">{{ group.headerText }}</span>
+      <div *ngFor="let subColumn of group.columns"
+           [class.suppressed-header]="group.headerText"
+           [class.search-header]="subColumn.isSearch">
+
+        <ng-container *ngIf="subColumn.icon">
+          <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
+        </ng-container>
+        <ng-container *ngIf="subColumn.isSearch">
+          <div class="search-box">
+            <div><img src="assets/icons/search.png" alt="Search"></div>
+            <input>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+  <div class="table-row" *ngFor="let row of data; let i = index">
+    <div class="table-row-group" *ngFor="let group of columns" [style.width]="group.width" [class.flex-grow-1]="!group.width">
+      <div *ngFor="let subColumn of group.columns"
+           [class.search-header]="subColumn.isSearch">
+        <ng-container [ngSwitch]="group.group">
+          <ng-container *ngSwitchCase="ColumnGroup.DeleteData">
+            <a (click)="deleteRow(row, i)"><img src="assets/icons/minus.png" alt="Delete"></a>
+          </ng-container>
+          <ng-container *ngSwitchCase="ColumnGroup.AlertData">
+            <div><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png" alt="Alert"></div>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            111
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+</div>
