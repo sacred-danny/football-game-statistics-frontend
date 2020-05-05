@@ -10,32 +10,43 @@
           <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
         </ng-container>
         <ng-container *ngIf="subColumn.isSearch">
-          <div class="search-box">
-            <div><img src="assets/icons/search.png" alt="Search"></div>
-            <input>
-          </div>
+          <form>
+            <div class="search-box">
+              <div><img src="assets/icons/search.png" alt="Search"></div>
+              <input >
+            </div>
+          </form>
         </ng-container>
-
       </div>
     </div>
   </div>
-  <div class="table-row" *ngFor="let row of data; let i = index">
+
+  <div class="table-row" *ngFor="let row of data; let i = index;">
     <div class="table-row-group" *ngFor="let group of columns" [style.width]="group.width" [class.flex-grow-1]="!group.width">
-      <div *ngFor="let subColumn of group.columns"
+      <div *ngFor="let subColumn of group.columns; let j = index"
            [class.search-header]="subColumn.isSearch">
         <ng-container [ngSwitch]="group.group">
           <ng-container *ngSwitchCase="ColumnGroup.DeleteData">
-            <a (click)="deleteRow(row, i)"><img src="assets/icons/minus.png" alt="Delete"></a>
+            <a (click)="deleteRow(i)"><img src="assets/icons/minus.png" alt="Delete"></a>
           </ng-container>
           <ng-container *ngSwitchCase="ColumnGroup.AlertData">
-            <div><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png" alt="Alert"></div>
+            <div (click)="addMatch(row, i)"><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png" alt="Alert"></div>
           </ng-container>
           <ng-container *ngSwitchDefault>
-            111
+            <div *ngIf="isArray(row[subColumn.name])" class="table-row-field" [class.table-flex-start]="row[subColumn.name][2]">
+              <span >{{ row[subColumn.name][0] }}</span>
+              <span >{{ row[subColumn.name][1] }}</span>
+            </div>
+            <ng-container *ngIf="!isArray(row[subColumn.name])">
+              {{row[subColumn.name]}}
+            </ng-container>
           </ng-container>
         </ng-container>
-
       </div>
     </div>
+  </div>
+
+  <div class="table-no-row" *ngIf="data.length == 0">
+    No Item
   </div>
 </div>
