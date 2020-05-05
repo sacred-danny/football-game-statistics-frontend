@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "football-game-statistics"
+    }
+  },
+  "defaultProject": "football-game-statistics",
+  "cli": {
+    "analytics": false
+  }
 }

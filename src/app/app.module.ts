@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {StatisticsModule} from './statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +11,6 @@ import {StatisticsModule} from './statistics/statistics.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StatisticsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
