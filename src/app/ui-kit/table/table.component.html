@@ -1,62 +1,68 @@
 <div class="table">
   <div class="table-header">
-    <div class="table-header-group" *ngFor="let group of columns" [style.width]="group.width" [class.flex-grow-1]="!group.width">
-      <span class="group-header" *ngIf="group.headerText">{{ group.headerText }}</span>
-      <div *ngFor="let subColumn of group.columns"
-           [class.suppressed-header]="group.headerText"
-           [class.search-header]="subColumn.isSearch">
-        <ng-container [ngSwitch]="group.group">
-          <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
-            <div class="table-field-sparkline">
-              <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
-            </div>
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            <ng-container *ngIf="subColumn.icon">
-              <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
+    <ng-container *ngFor="let group of columns;">
+      <div class="table-header-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="(group.group != ColumnGroup.StatisticsData || statisticsService.status[statisticsIndex].showSparkLine)">
+        <span class="group-header" *ngIf="group.headerText">{{ group.headerText }}</span>
+        <div *ngFor="let subColumn of group.columns" [class.suppressed-header]="group.headerText" [class.search-header]="subColumn.isSearch">
+          <ng-container [ngSwitch]="group.group">
+            <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+              <div class="table-field-sparkline">
+                <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
+              </div>
             </ng-container>
-            <ng-container *ngIf="subColumn.isSearch">
-              <form [formGroup]="searchForm">
-                <div class="search-box">
-                  <div><img src="assets/icons/search.png" alt="Search"></div>
-                  <input formControlName="searchText" (keydown.enter)="onSubmit()">
-                </div>
-              </form>
+            <ng-container *ngSwitchDefault>
+              <ng-container *ngIf="subColumn.icon">
+                <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
+              </ng-container>
+              <ng-container *ngIf="subColumn.isSearch">
+                <form [formGroup]="searchForm">
+                  <div class="search-box">
+                    <div><img src="assets/icons/search.png" alt="Search"></div>
+                    <input formControlName="searchText" (keydown.enter)="onSubmit()">
+                  </div>
+                </form>
+              </ng-container>
             </ng-container>
           </ng-container>
-        </ng-container>
 
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
   <ng-container *ngFor="let row of data; let i = index;">
     <div class="table-row" *ngIf="row.show">
-      <div class="table-row-group" *ngFor="let group of columns" [style.width]="group.width" [class.flex-grow-1]="!group.width">
-        <div *ngFor="let subColumn of group.columns; let j = index"
-             [class.search-header]="subColumn.isSearch">
-          <ng-container [ngSwitch]="group.group">
-            <ng-container *ngSwitchCase="ColumnGroup.DeleteData">
-              <a (click)="deleteRow(i)"><img src="assets/icons/minus.png" alt="Delete"></a>
-            </ng-container>
-            <ng-container *ngSwitchCase="ColumnGroup.AlertData">
-              <div (click)="addMatch(row, i)"><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png" alt="Alert"></div>
-            </ng-container>
-            <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
-              <div class="table-field-sparkline"><img src="assets/icons/sparkline-match.png" alt="Sparkline"></div>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              <div *ngIf="isArray(row[subColumn.name])" class="table-row-field" [class.table-flex-start]="row[subColumn.name][2]">
-                <span >{{ row[subColumn.name][0] }}</span>
-                <span >{{ row[subColumn.name][1] }}</span>
-              </div>
-              <ng-container *ngIf="!isArray(row[subColumn.name])">
-                {{row[subColumn.name]}}
+      <ng-container *ngFor="let group of columns">
+        <div class="table-row-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="(group.group != ColumnGroup.StatisticsData || statisticsService.status[statisticsIndex].showSparkLine)">
+          <div *ngFor="let subColumn of group.columns;"
+               [class.search-header]="subColumn.isSearch">
+            <ng-container [ngSwitch]="group.group">
+              <ng-container *ngSwitchCase="ColumnGroup.DeleteData">
+                <a (click)="deleteRow(i)"><img src="assets/icons/minus.png" alt="Delete"></a>
+              </ng-container>
+              <ng-container *ngSwitchCase="ColumnGroup.AlertData">
+                <div (click)="addMatch(row, i)"><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png"
+                                                     alt="Alert"></div>
+              </ng-container>
+              <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+                <div class="table-field-sparkline">
+                  <img src="assets/icons/sparkline-match.png" alt="Sparkline">
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <div *ngIf="isArray(row[subColumn.name])" class="table-row-field"
+                     [class.table-flex-start]="row[subColumn.name][2]">
+                  <span>{{ row[subColumn.name][0] }}</span>
+                  <span>{{ row[subColumn.name][1] }}</span>
+                </div>
+                <ng-container *ngIf="!isArray(row[subColumn.name])">
+                  {{row[subColumn.name]}}
+                </ng-container>
               </ng-container>
             </ng-container>
-          </ng-container>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </ng-container>
 

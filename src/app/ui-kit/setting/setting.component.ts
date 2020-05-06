@@ -1,4 +1,5 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { StatisticsService} from '../../core/services/statistics.service';
 
 @Component({
   selector: 'app-setting',
@@ -6,12 +7,19 @@ import { Component,Input, OnInit } from '@angular/core';
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent implements OnInit {
-
   @Input() title: any;
 
-  constructor() { }
+  constructor(private statisticsService: StatisticsService) {
+  }
 
   ngOnInit(): void {
   }
 
+  visibleSparkLine() {
+    this.statisticsService.activeIndex = parseInt(this.title.replace(this.statisticsService.titlePrefix, ''), 10) - 1;
+    // console.log(this.statisticsService.activeIndex);
+    console.log(this.statisticsService.status);
+    this.statisticsService.status[this.statisticsService.activeIndex].showSparkLine =
+      !this.statisticsService.status[this.statisticsService.activeIndex].showSparkLine;
+  }
 }

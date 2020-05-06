@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {StatisticsComponent} from './ui-kit/statistics/statistics.component';
+import { StatisticsComponent } from './ui-kit/statistics/statistics.component';
+import { StatisticsService } from './core/services/statistics.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,19 @@ export class AppComponent {
 
   statistics: any;
 
-  constructor() {
+  constructor(private statisticsService: StatisticsService) {
     this.statistics = [{
-      title: 'Grid Example 1',
-      background: '#98d9eb'
+      index: 0,
+      title: this.statisticsService.primaryTitle,
+      background: this.statisticsService.primaryBackground
     }];
+    this.statisticsService.status = [{
+      index: 0,
+      title: this.statisticsService.primaryTitle,
+      background: this.statisticsService.primaryBackground,
+      showSparkLine: true
+    }];
+    this.statisticsService.activeIndex = 0;
   }
 
   make_backround_color() {
@@ -23,11 +32,20 @@ export class AppComponent {
 
   addStatistics() {
     const statisticsIndex = this.statistics.length + 1;
+    const backgroundColor = this.make_backround_color();
     this.statistics.push(
       {
-        title: 'Grid Example ' + statisticsIndex,
-        background: this.make_backround_color(),
+        index: statisticsIndex - 1,
+        title: this.statisticsService.titlePrefix + statisticsIndex,
+        background: backgroundColor,
       }
     );
+
+    this.statisticsService.status.push({
+      index: statisticsIndex - 1,
+      title: this.statisticsService.titlePrefix + statisticsIndex,
+      background: backgroundColor,
+      showSparkLine: true
+    });
   }
 }

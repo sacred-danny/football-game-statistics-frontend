@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { StatisticsService } from '../../core/services/statistics.service';
 
 import * as jsonData from '../../../assets/json/match.json';
 
@@ -17,6 +18,7 @@ enum ColumnGroup {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  @Input() statisticsIndex: any;
 
   searchForm = new FormGroup({
     searchText: new FormControl(''),
@@ -86,7 +88,8 @@ export class TableComponent implements OnInit {
   data = [];
   showLowCount = 0;
 
-  constructor() {
+  constructor(public statisticsService: StatisticsService) {
+    console.log(`index = ${this.statisticsIndex}`);
     const tempData: any[] = Array.of(jsonData);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < tempData[0].default.length; i++) {

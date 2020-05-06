@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from '../table/table.module';
-import { SettingModule} from '../setting/setting.module';
+import { SettingModule } from '../setting/setting.module';
 
-import {StatisticsComponent} from './statistics.component';
+import { StatisticsComponent } from './statistics.component';
 
 @NgModule({
   declarations: [StatisticsComponent],
@@ -12,7 +12,7 @@ import {StatisticsComponent} from './statistics.component';
     TableModule,
     SettingModule
   ],
-  exports: [StatisticsComponent]
+  exports: [StatisticsComponent],
 })
 export class StatisticsModule {
 }

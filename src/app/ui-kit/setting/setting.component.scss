@@ -1,21 +1,25 @@
 .settings {
   display: flex;
   padding-bottom: 1rem;
+
   .title {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 2rem;
+
     span {
       color: black;
       font-weight: 500;
       font-size: 25px;
     }
   }
-  .buttons{
+
+  .buttons {
     display: flex;
     align-items: center;
     justify-content: center;
+
     .button {
       font-weight: 500;
       color: black;
@@ -24,6 +28,7 @@
       width: 100px;
       text-align: center;
       margin-right: 1rem;
+      cursor: pointer;
     }
 
     &:last-child {

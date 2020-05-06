@@ -17,4 +17,5 @@ import { TableComponent } from './table.component';
     TableComponent
   ]
 })
-export class TableModule { }
+export class TableModule {
+}

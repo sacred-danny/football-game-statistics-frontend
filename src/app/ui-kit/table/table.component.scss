@@ -24,15 +24,18 @@ $border: 4px solid black;
     display: flex;
     position: relative;
     border-right: $border;
+
     &:last-child {
       border-right: none;
     }
+
     .table-field-sparkline {
       img {
         height: 80%;
         width: 30%;
       }
     }
+
     span.group-header {
       position: absolute;
       top: 2px;
@@ -50,32 +53,40 @@ $border: 4px solid black;
 .table-row {
   display: flex;
   border-bottom: $border;
+
   &:last-child {
     border-bottom: none;
   }
+
   .table-row-group {
     display: flex;
     border-right: $border;
+
     &:last-child {
       border-right: none;
     }
+
     .table-field-sparkline {
       img {
         width: 90%;
       }
     }
+
     .table-row-field {
       display: grid;
+
       span {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
       }
     }
+
     .table-flex-start {
       display: grid;
       text-align: left;
       justify-content: flex-start;
+
       span {
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -90,16 +101,19 @@ $border: 4px solid black;
     height: 35px;
     flex: 1;
     @include center();
+
     img {
       width: 17px;
     }
 
     &.suppressed-header {
       padding-top: 10px;
+
       img {
         width: 15px;
       }
     }
+
     &.search-header {
       flex: 0 0 150px;
     }
@@ -108,6 +122,7 @@ $border: 4px solid black;
 
 .search-box {
   display: flex;
+
   input {
     margin-left: 5px;
     width: 100%;
