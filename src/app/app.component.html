@@ -1,1 +1,8 @@
-<app-table></app-table>
+<div class="topbar">
+  <div class="plus-grid" (click)="addStatistics()">+</div>
+</div>
+<div class="body">
+  <ng-container *ngFor="let statistic of statistics;">
+    <app-statistics  [title]="statistic.title" [background]="statistic.background"></app-statistics>
+  </ng-container>
+</div>

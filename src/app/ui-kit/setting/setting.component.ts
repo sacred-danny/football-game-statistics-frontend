@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-setting',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent implements OnInit {
+
+  @Input() title: any;
 
   constructor() { }
 

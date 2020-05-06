@@ -12,6 +12,8 @@ $border: 4px solid black;
   color: black;
   font-weight: bold;
   font-size: 12px;
+  max-height: 200px;
+  overflow: auto;
 }
 
 .table-header {

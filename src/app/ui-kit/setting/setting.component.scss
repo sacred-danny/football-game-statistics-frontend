@@ -1,0 +1,35 @@
+.settings {
+  display: flex;
+  padding-bottom: 1rem;
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+    span {
+      color: black;
+      font-weight: 500;
+      font-size: 25px;
+    }
+  }
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .button {
+      font-weight: 500;
+      color: black;
+      font-size: 20px;
+      background: #0000ff;
+      width: 100px;
+      text-align: center;
+      margin-right: 1rem;
+    }
+
+    &:last-child {
+      img {
+        width: 48px;
+      }
+    }
+  }
+}
