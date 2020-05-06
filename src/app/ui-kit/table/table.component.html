@@ -5,18 +5,27 @@
       <div *ngFor="let subColumn of group.columns"
            [class.suppressed-header]="group.headerText"
            [class.search-header]="subColumn.isSearch">
-
-        <ng-container *ngIf="subColumn.icon">
-          <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
-        </ng-container>
-        <ng-container *ngIf="subColumn.isSearch">
-          <form [formGroup]="searchForm">
-            <div class="search-box">
-              <div><img src="assets/icons/search.png" alt="Search"></div>
-              <input formControlName="searchText" (keydown.enter)="onSubmit()">
+        <ng-container [ngSwitch]="group.group">
+          <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+            <div class="table-field-sparkline">
+              <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
             </div>
-          </form>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <ng-container *ngIf="subColumn.icon">
+              <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
+            </ng-container>
+            <ng-container *ngIf="subColumn.isSearch">
+              <form [formGroup]="searchForm">
+                <div class="search-box">
+                  <div><img src="assets/icons/search.png" alt="Search"></div>
+                  <input formControlName="searchText" (keydown.enter)="onSubmit()">
+                </div>
+              </form>
+            </ng-container>
+          </ng-container>
         </ng-container>
+
       </div>
     </div>
   </div>
@@ -32,6 +41,9 @@
             </ng-container>
             <ng-container *ngSwitchCase="ColumnGroup.AlertData">
               <div (click)="addMatch(row, i)"><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png" alt="Alert"></div>
+            </ng-container>
+            <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+              <div class="table-field-sparkline"><img src="assets/icons/sparkline-match.png" alt="Sparkline"></div>
             </ng-container>
             <ng-container *ngSwitchDefault>
               <div *ngIf="isArray(row[subColumn.name])" class="table-row-field" [class.table-flex-start]="row[subColumn.name][2]">

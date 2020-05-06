@@ -64,7 +64,7 @@ export class TableComponent implements OnInit {
       group: ColumnGroup.StatisticsData,
       width: '200px',
       columns: [
-        { icon: '', name: '', width: '', group: ColumnGroup.StatisticsData },
+        { icon: 'sparkline-header.png', name: '', width: '', group: ColumnGroup.StatisticsData },
       ],
     },
     {
@@ -123,7 +123,6 @@ export class TableComponent implements OnInit {
       // @ts-ignore
       this.data.push(temp);
     }
-    console.log(this.data);
   }
 
   ngOnInit(): void {
