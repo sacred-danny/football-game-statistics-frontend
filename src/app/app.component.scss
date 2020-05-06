@@ -1,3 +1,4 @@
+$buttonColor: #de00ff;
 .topbar {
   height: 90px;
 
@@ -5,7 +6,7 @@
     float: right;
     color: white;
     text-align: center;
-    background: #de00ff;
+    background: $buttonColor;
     width: 60px;
     height: 60px;
     font-size: 40px;
