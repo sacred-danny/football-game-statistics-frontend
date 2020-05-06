@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import * as jsonData from '../../../assets/json/match.json';
+
 enum ColumnGroup {
   CurrentData = 'CURRENT_DATA',
   PrevData = 'PREV_DATA',
@@ -14,6 +17,10 @@ enum ColumnGroup {
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+
+  searchForm = new FormGroup({
+    searchText: new FormControl(''),
+  });
 
   ColumnGroup = ColumnGroup;
 
@@ -77,6 +84,7 @@ export class TableComponent implements OnInit {
   ];
 
   data = [];
+  showLowCount = 0;
 
   constructor() {
     const tempData: any[] = Array.of(jsonData);
@@ -86,7 +94,7 @@ export class TableComponent implements OnInit {
         GameTime: tempData[0].default[i].GameTime,
         Score: tempData[0].default[i].Score,
         // tslint:disable-next-line:max-line-length
-        TeamNames: [ (tempData[0].default[i].HomeName + '(' + tempData[0].default[i].HomePosition + ')' + tempData[0].default[i].KickOffTime),
+        TeamNames: [(tempData[0].default[i].HomeName + '(' + tempData[0].default[i].HomePosition + ')' + tempData[0].default[i].KickOffTime),
           (tempData[0].default[i].AwayName + '(' + tempData[0].default[i].AwayPosition + ')' + tempData[0].default[i].KickOffTime),
           true,
         ],
@@ -109,7 +117,8 @@ export class TableComponent implements OnInit {
         ShotsCorners: [tempData[0].default[i].Stats.HomeLast10.Corners, tempData[0].default[i].Stats.AwayLast10.Corners],
         ShotsGoals: [tempData[0].default[i].Stats.HomeLast10.Goals, tempData[0].default[i].Stats.AwayLast10.Goals],
         ShotsPressureIndex: [tempData[0].default[i].Stats.HomeLast10.PressureIndex, tempData[0].default[i].Stats.AwayLast10.PressureIndex],
-        matched: false
+        matched: false,
+        show: true
       };
       // @ts-ignore
       this.data.push(temp);
@@ -128,11 +137,25 @@ export class TableComponent implements OnInit {
     row.matched = !row.matched;
   }
 
-  isArray(obj: any ) {
+  isArray(obj: any) {
     return Array.isArray(obj);
   }
 
   onSubmit() {
-    alert('OK');
+    const searchText = this.searchForm.get('searchText')?.value;
+    this.showLowCount = 0;
+    for (let i = 0, len = this.data.length; i < len; i++) {
+      if (JSON.stringify(this.data[i]).indexOf(searchText) < 0) {
+        // @ts-ignore
+        this.data[i].show = false;
+      } else {
+        // @ts-ignore
+        this.data[i].show = true;
+        this.showLowCount++;
+      }
+    }
+    if (this.showLowCount === 0) {
+      this.showLowCount = -1;
+    }
   }
 }
