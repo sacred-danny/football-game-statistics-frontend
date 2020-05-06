@@ -89,7 +89,6 @@ export class TableComponent implements OnInit {
   showLowCount = 0;
 
   constructor(public statisticsService: StatisticsService) {
-    console.log(`index = ${this.statisticsIndex}`);
     const tempData: any[] = Array.of(jsonData);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < tempData[0].default.length; i++) {

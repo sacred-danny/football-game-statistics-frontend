@@ -17,8 +17,6 @@ export class SettingComponent implements OnInit {
 
   visibleSparkLine() {
     this.statisticsService.activeIndex = parseInt(this.title.replace(this.statisticsService.titlePrefix, ''), 10) - 1;
-    // console.log(this.statisticsService.activeIndex);
-    console.log(this.statisticsService.status);
     this.statisticsService.status[this.statisticsService.activeIndex].showSparkLine =
       !this.statisticsService.status[this.statisticsService.activeIndex].showSparkLine;
   }
