@@ -1,11 +1,11 @@
 <div class="table">
   <div class="table-header">
-    <ng-container *ngFor="let group of columns;">
-      <div class="table-header-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="(group.group != ColumnGroup.StatisticsData || statisticsService.status[statisticsIndex].showSparkLine)">
+    <ng-container *ngFor="let group of statisticsService.status[statisticsIndex].columns;">
+      <div class="table-header-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="group.show">
         <span class="group-header" *ngIf="group.headerText">{{ group.headerText }}</span>
         <div *ngFor="let subColumn of group.columns" [class.suppressed-header]="group.headerText" [class.search-header]="subColumn.isSearch">
-          <ng-container [ngSwitch]="group.group">
-            <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+          <ng-container [ngSwitch]="group.group" *ngIf="subColumn.show">
+            <ng-container *ngSwitchCase="statisticsService.ColumnGroup.StatisticsData">
               <div class="table-field-sparkline">
                 <img src="assets/icons/{{subColumn.icon}}" [alt]="subColumn.name" *ngIf="subColumn.icon">
               </div>
@@ -30,21 +30,21 @@
     </ng-container>
   </div>
 
-  <ng-container *ngFor="let row of data; let i = index;">
+  <ng-container *ngFor="let row of statisticsService.status[statisticsIndex].data; let i = index;">
     <div class="table-row" *ngIf="row.show">
-      <ng-container *ngFor="let group of columns">
-        <div class="table-row-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="(group.group != ColumnGroup.StatisticsData || statisticsService.status[statisticsIndex].showSparkLine)">
+      <ng-container *ngFor="let group of statisticsService.status[statisticsIndex].columns;">
+        <div class="table-row-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="group.show">
           <div *ngFor="let subColumn of group.columns;"
                [class.search-header]="subColumn.isSearch">
             <ng-container [ngSwitch]="group.group">
-              <ng-container *ngSwitchCase="ColumnGroup.DeleteData">
+              <ng-container *ngSwitchCase="statisticsService.ColumnGroup.DeleteData">
                 <a (click)="deleteRow(i)"><img src="assets/icons/minus.png" alt="Delete"></a>
               </ng-container>
-              <ng-container *ngSwitchCase="ColumnGroup.AlertData">
+              <ng-container *ngSwitchCase="statisticsService.ColumnGroup.AlertData">
                 <div (click)="addMatch(row, i)"><img src="assets/icons/alert-{{ row.matched ? 'header' : 'match' }}.png"
                                                      alt="Alert"></div>
               </ng-container>
-              <ng-container *ngSwitchCase="ColumnGroup.StatisticsData">
+              <ng-container *ngSwitchCase="statisticsService.ColumnGroup.StatisticsData">
                 <div class="table-field-sparkline">
                   <img src="assets/icons/sparkline-match.png" alt="Sparkline">
                 </div>
@@ -66,7 +66,7 @@
     </div>
   </ng-container>
 
-  <div class="table-no-row" *ngIf="data.length == 0 || showLowCount == -1">
+  <div class="table-no-row" *ngIf="statisticsService.status[statisticsIndex].data.length == 0 || statisticsService.status[statisticsIndex].showDataCount == -1">
     No Item
   </div>
 

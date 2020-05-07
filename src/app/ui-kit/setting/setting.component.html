@@ -3,14 +3,25 @@
     <span>{{title}}</span>
   </div>
   <div class="buttons">
-    <div class="button">
+    <div class="button" (click)="filterQuick()">
       Quick FILTERS
     </div>
-    <div class="button">
+    <div class="button" (click)="filterStat()">
       STATS FILTERS
     </div>
     <div (click)="visibleSparkLine()">
       <img src="assets/icons/setting.png" alt="Settings">
+    </div>
+  </div>
+
+  <div class="quick-filters" *ngIf="isQuickFilterClicked">
+    <div class="first-line">
+      <div class="button" (click)="firstHalf()" [class.button-active]="isFirstClicked">1st Half</div>
+      <div class="button" (click)="secondHalf()" [class.button-active]="isSecondClicked">2nd Half</div>
+    </div>
+    <div class="second-line">
+      <div class="button" (click)="dominance()" [class.button-active]="isDominanceClicked">Home Dominance</div>
+      <div class="button" (click)="underScalp()" [class.button-active]="isUnderScalpClicked">Unders scalp</div>
     </div>
   </div>
 </div>

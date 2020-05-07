@@ -19,22 +19,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    .button-active {
+      background: #1515eb !important;
+    }
     .button {
       font-weight: 500;
       color: black;
       font-size: 20px;
-      background: #0000ff;
+      background: #3535db;
       width: 100px;
       text-align: center;
       margin-right: 1rem;
       cursor: pointer;
     }
+  }
 
-    &:last-child {
-      img {
-        width: 48px;
+  .quick-filters {
+    position: relative;
+    left: 100px;
+    .button-active {
+      background: #ff6400 !important;
+    }
+    .button {
+      font-weight: 500;
+      color: white;
+      font-size: 20px;
+      width: 220px;
+      background: #d36922;
+      text-align: center;
+      margin-right: 1rem;
+      cursor: pointer;
+      &:last-child {
+        margin: 0px;
       }
+    }
+    .first-line {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    .second-line {
+      display: flex;
     }
   }
 }
