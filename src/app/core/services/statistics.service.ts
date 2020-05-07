@@ -102,5 +102,5 @@ export class StatisticsService {
     this.status = [];
   }
 
-  //ng build --prod --base-href "https://icarus96119.github.io/football-game-statistics/"
+  //ng build --prod --base-href "https://icarus96119.github.io/football-game-statistics-frontend/"
 }
