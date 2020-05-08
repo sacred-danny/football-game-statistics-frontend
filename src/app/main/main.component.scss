@@ -1,0 +1,22 @@
+$buttonColor: #de00ff;
+.topbar {
+  height: 90px;
+
+  .plus-grid {
+    float: right;
+    color: white;
+    text-align: center;
+    background: $buttonColor;
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+    font-weight: 500;
+    border-radius: 50%;
+    margin: 1rem;
+    cursor: pointer;
+  }
+}
+
+.body {
+  padding: 3rem;
+}

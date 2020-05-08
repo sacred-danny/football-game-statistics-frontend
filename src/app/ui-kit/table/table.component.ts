@@ -18,14 +18,13 @@ export class TableComponent implements OnInit {
   showLowCount = 0;
 
   constructor(public statisticsService: StatisticsService) {
-
   }
 
   ngOnInit(): void {
   }
 
   deleteRow(index: number) {
-    this.statisticsService.status[this.statisticsIndex].data.splice(index, 1);
+    this.statisticsService.stats[this.statisticsIndex].data.splice(index, 1);
   }
 
   addMatch(row: any, index: number) {
@@ -39,20 +38,20 @@ export class TableComponent implements OnInit {
   onSubmit() {
     const searchText = this.searchForm.get('searchText')?.value;
     // @ts-ignore
-    this.statisticsService.status[this.statisticsIndex].showDataCount = 0;
-    for (let i = 0, len = this.statisticsService.status[this.statisticsIndex].data.length; i < len; i++) {
-      if (JSON.stringify(this.statisticsService.status[this.statisticsIndex].data[i]).indexOf(searchText) < 0) {
+    this.statisticsService.stats[this.statisticsIndex].showDataCount = 0;
+    for (let i = 0, len = this.statisticsService.stats[this.statisticsIndex].data.length; i < len; i++) {
+      if (JSON.stringify(this.statisticsService.stats[this.statisticsIndex].data[i]).indexOf(searchText) < 0) {
         // @ts-ignore
-        this.statisticsService.status[this.statisticsIndex].data[i].show = false;
+        this.statisticsService.stats[this.statisticsIndex].data[i].show = false;
       } else {
         // @ts-ignore
-        this.statisticsService.status[this.statisticsIndex].data[i].show = true;
-        this.statisticsService.status[this.statisticsIndex].showDataCount++;
+        this.statisticsService.stats[this.statisticsIndex].data[i].show = true;
+        this.statisticsService.stats[this.statisticsIndex].showDataCount++;
       }
     }
 
-    if (this.statisticsService.status[this.statisticsIndex].showDataCount === 0) {
-      this.statisticsService.status[this.statisticsIndex].showDataCount = -1;
+    if (this.statisticsService.stats[this.statisticsIndex].showDataCount === 0) {
+      this.statisticsService.stats[this.statisticsIndex].showDataCount = -1;
     }
   }
 }

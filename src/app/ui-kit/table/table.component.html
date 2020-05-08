@@ -1,6 +1,6 @@
 <div class="table">
   <div class="table-header">
-    <ng-container *ngFor="let group of statisticsService.status[statisticsIndex].columns;">
+    <ng-container *ngFor="let group of statisticsService.stats[statisticsIndex].columns;">
       <div class="table-header-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="group.show">
         <span class="group-header" *ngIf="group.headerText">{{ group.headerText }}</span>
         <div *ngFor="let subColumn of group.columns" [class.suppressed-header]="group.headerText" [class.search-header]="subColumn.isSearch">
@@ -30,9 +30,9 @@
     </ng-container>
   </div>
 
-  <ng-container *ngFor="let row of statisticsService.status[statisticsIndex].data; let i = index;">
+  <ng-container *ngFor="let row of statisticsService.stats[statisticsIndex].data; let i = index;">
     <div class="table-row" *ngIf="row.show">
-      <ng-container *ngFor="let group of statisticsService.status[statisticsIndex].columns;">
+      <ng-container *ngFor="let group of statisticsService.stats[statisticsIndex].columns;">
         <div class="table-row-group" [style.width]="group.width" [class.flex-grow-1]="!group.width" *ngIf="group.show">
           <div *ngFor="let subColumn of group.columns;"
                [class.search-header]="subColumn.isSearch">
@@ -66,7 +66,7 @@
     </div>
   </ng-container>
 
-  <div class="table-no-row" *ngIf="statisticsService.status[statisticsIndex].data.length == 0 || statisticsService.status[statisticsIndex].showDataCount == -1">
+  <div class="table-no-row" *ngIf="statisticsService.stats[statisticsIndex].data.length == 0 || statisticsService.stats[statisticsIndex].showDataCount == -1">
     No Item
   </div>
 
