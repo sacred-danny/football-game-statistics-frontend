@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatsFiltersModalComponent } from './stats-filters-modal.component';
+import { StatsModalComponent } from './stats-modal.component';
 
-describe('StatsFiltersModalComponent', () => {
-  let component: StatsFiltersModalComponent;
-  let fixture: ComponentFixture<StatsFiltersModalComponent>;
+describe('StatsModalComponent', () => {
+  let component: StatsModalComponent;
+  let fixture: ComponentFixture<StatsModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatsFiltersModalComponent ]
+      declarations: [ StatsModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatsFiltersModalComponent);
+    fixture = TestBed.createComponent(StatsModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

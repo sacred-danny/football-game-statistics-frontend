@@ -18,7 +18,7 @@
                 <form [formGroup]="searchForm">
                   <div class="search-box">
                     <div><img src="assets/icons/search.png" alt="Search"></div>
-                    <input formControlName="searchText" (keydown.enter)="onSubmit()">
+                    <input formControlName="searchText" (keydown)="onSubmit($event)">
                   </div>
                 </form>
               </ng-container>

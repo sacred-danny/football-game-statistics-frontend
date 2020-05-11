@@ -16,12 +16,12 @@
 
   <div class="quick-filters" *ngIf="isQuickFilterClicked">
     <div class="first-line">
-      <div class="button" (click)="firstHalf()" [class.button-active]="isFirstClicked">1st Half</div>
-      <div class="button" (click)="secondHalf()" [class.button-active]="isSecondClicked">2nd Half</div>
+      <div class="button" (click)="firstHalf()" [class.button-active]="statisticsService.stats[statisticsIndex].isFirstClicked">1st Half</div>
+      <div class="button" (click)="secondHalf()" [class.button-active]="statisticsService.stats[statisticsIndex].isSecondClicked">2nd Half</div>
     </div>
     <div class="second-line">
-      <div class="button" (click)="dominance()" [class.button-active]="isDominanceClicked">Home Dominance</div>
-      <div class="button" (click)="underScalp()" [class.button-active]="isUnderScalpClicked">Unders scalp</div>
+      <div class="button" (click)="dominance()" [class.button-active]="statisticsService.stats[statisticsIndex].isDominanceClicked">Home Dominance</div>
+      <div class="button" (click)="underScalp()" [class.button-active]="statisticsService.stats[statisticsIndex].isUnderScalpClicked">Unders scalp</div>
     </div>
   </div>
 </div>

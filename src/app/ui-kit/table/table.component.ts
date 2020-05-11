@@ -35,23 +35,10 @@ export class TableComponent implements OnInit {
     return Array.isArray(obj);
   }
 
-  onSubmit() {
-    const searchText = this.searchForm.get('searchText')?.value;
-    // @ts-ignore
-    this.statisticsService.stats[this.statisticsIndex].showDataCount = 0;
-    for (let i = 0, len = this.statisticsService.stats[this.statisticsIndex].data.length; i < len; i++) {
-      if (JSON.stringify(this.statisticsService.stats[this.statisticsIndex].data[i]).indexOf(searchText) < 0) {
-        // @ts-ignore
-        this.statisticsService.stats[this.statisticsIndex].data[i].show = false;
-      } else {
-        // @ts-ignore
-        this.statisticsService.stats[this.statisticsIndex].data[i].show = true;
-        this.statisticsService.stats[this.statisticsIndex].showDataCount++;
-      }
-    }
-
-    if (this.statisticsService.stats[this.statisticsIndex].showDataCount === 0) {
-      this.statisticsService.stats[this.statisticsIndex].showDataCount = -1;
+  onSubmit(event: any) {
+    this.statisticsService.stats[this.statisticsIndex].searchText = this.searchForm.get('searchText')?.value;
+    if (event.key === 'Enter') {
+      this.statisticsService.allQuickFilter(this.statisticsIndex);
     }
   }
 }

@@ -52,8 +52,14 @@ export class MainComponent implements OnInit {
       title: this.statisticsService.titlePrefix + statisticsIndex,
       background: backgroundColor,
       columns: JSON.parse(JSON.stringify(this.statisticsService.primaryColumns)),
-      data: this.statisticsService.currentStatistic,
-      showDataCount: 0
+      data: JSON.parse(JSON.stringify(this.statisticsService.currentStatistic)),
+      showDataCount: 0,
+      statsFilterQuery: [],
+      isFirstClicked: false,
+      isSecondClicked: false,
+      isDominanceClicked: false,
+      isUnderScalpClicked: false,
+      searchText: ''
     });
   }
 

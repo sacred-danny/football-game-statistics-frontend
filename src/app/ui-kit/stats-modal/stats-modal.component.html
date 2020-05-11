@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>STATS FILTERS</h1>
+<div mat-dialog-content>
+  <app-stats-filter [index]="0"></app-stats-filter>
+  <ng-container *ngFor="let query of statisticsService.stats[statisticsService.selectedStatsIndex].statsFilterQuery; let i = index;">
+    <app-stats-filter [index]="i + 1"></app-stats-filter>
+  </ng-container>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onYesClick()">Yes</button>
+  <button mat-button (click)="onNoClick()">No</button>
+</div>

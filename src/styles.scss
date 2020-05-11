@@ -2,6 +2,7 @@
 
 /* Importing Bootstrap SCSS file. */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~bootstrap/scss/bootstrap';
 
 * {

@@ -1,0 +1,47 @@
+<div class="filter" *ngIf="statisticsService.stats[statisticsService.selectedStatsIndex].statsFilterQuery[index] !== ''">
+  <div class="statsSection">
+    <label>Stat Type</label>
+    <select class="statsType" [(ngModel)]="statType" ngDefaultControl (ngModelChange)="makeQuery()">
+      <option [value]="type.value" *ngFor="let type of statisticsService.statType">
+        {{ type.title }}
+      </option>
+    </select>
+  </div>
+  <div class="filterSection" *ngIf="statType !== 'OriginalAllStats.Score'">
+    <label>Filter Type</label>
+    <select class="filterType" [(ngModel)]="filterType" ngDefaultControl (ngModelChange)="makeQuery()">
+      <option [value]="type.value" *ngFor="let type of statisticsService.filterType">
+        {{ type.title }}
+      </option>
+    </select>
+  </div>
+
+  <div class="valueSection" *ngIf="statType === 'OriginalAllStats.Score'">
+    <label>Home</label>
+    <input type="number" min="0" [(ngModel)]="valueHome" ngDefaultControl placeholder="Home" (ngModelChange)="makeQuery()">
+  </div>
+
+  <div class="valueSection" *ngIf="statType === 'OriginalAllStats.Score'">
+    <label>Away</label>
+    <input type="number" min="0" [(ngModel)]="valueAway" ngDefaultControl placeholder="Away" (ngModelChange)="makeQuery()">
+  </div>
+
+  <div class="valueSection" *ngIf="statType !== 'OriginalAllStats.Score'">
+    <label>Value</label>
+    <input type="number" min="0" [(ngModel)]="value" ngDefaultControl (ngModelChange)="makeQuery()">
+  </div>
+
+  <div class="andOrSection">
+    <label>And / Or</label>
+    <select class="filterType" [(ngModel)]="andOrType" ngDefaultControl (ngModelChange)="makeQuery()">
+      <option [value]="type.value" *ngFor="let type of andOrTypes">
+        {{ type.title }}
+      </option>
+    </select>
+  </div>
+
+  <div class="addRemoveSection">
+<!--    <div class="plus" (click)="onPlus()"><label>+</label></div>-->
+    <div class="minus" (click)="onMinus()"><label>-</label></div>
+  </div>
+</div>
