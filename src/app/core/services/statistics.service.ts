@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { config } from '../../config/config';
 
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+
 // @ts-ignore
 @Injectable({
   providedIn: 'root'
@@ -230,27 +233,61 @@ export class StatisticsService {
         temp.OriginalAllStats.TotalRedCards = parseInt(temp.OriginalAllStats.Stats.TotalHomeRedCards, 10) +  parseInt(temp.OriginalAllStats.Stats.TotalAwayRedCards, 10);
 
         if (res.stats[i].AttackingPressureGraphsExists === true) {
+          let chartData = [];
+          let chartLabels = [];
+          let graphData = JSON.parse(res.stats[i].AttackingPressureGraphs[0].GraphData);
+          for (let j = 0; j < Object.keys(graphData).length; j++) {
+            chartData.push(graphData[j]);
+            chartLabels.push(j + 1);
+          }
           // @ts-ignore
           temp.TotalGraphs1[0] = {
             id: res.stats[i].AttackingPressureGraphs[0].GraphTypeId,
-            value: res.stats[i].AttackingPressureGraphs[0].GraphData
+            lineChartData: [{data: chartData, label: 'AP1 Home'}],
+            lineChartLabels: chartLabels
           };
+
+          chartData = [];
+          chartLabels = [];
+          graphData = JSON.parse(res.stats[i].AttackingPressureGraphs[2].GraphData);
+          for (let j = 0; j < Object.keys(graphData).length; j++) {
+            chartData.push(graphData[j]);
+            chartLabels.push((j + 1).toString());
+          }
           // @ts-ignore
           temp.TotalGraphs1[1] = {
             id: res.stats[i].AttackingPressureGraphs[2].GraphTypeId,
-            value: res.stats[i].AttackingPressureGraphs[2].GraphData
+            lineChartData: [{data: chartData, label: 'AP1 Away'}],
+            lineChartLabels: chartLabels
           };
+
+          chartData = [];
+          chartLabels = [];
+          graphData = JSON.parse(res.stats[i].AttackingPressureGraphs[1].GraphData);
+          for (let j = 0; j < Object.keys(graphData).length; j++) {
+            chartData.push(graphData[j]);
+            chartLabels.push(j + 1);
+          }
 
           // @ts-ignore
           temp.TotalGraphs2[0] = {
             id: res.stats[i].AttackingPressureGraphs[1].GraphTypeId,
-            value: res.stats[i].AttackingPressureGraphs[1].GraphData
+            lineChartData: [{data: chartData, label: 'AP2 Home'}],
+            lineChartLabels: chartLabels
           };
 
+          chartData = [];
+          chartLabels = [];
+          graphData = JSON.parse(res.stats[i].AttackingPressureGraphs[3].GraphData);
+          for (let j = 0; j < Object.keys(graphData).length; j++) {
+            chartData.push(graphData[j]);
+            chartLabels.push(j + 1);
+          }
           // @ts-ignore
           temp.TotalGraphs2[1] = {
             id: res.stats[i].AttackingPressureGraphs[3].GraphTypeId,
-            value: res.stats[i].AttackingPressureGraphs[3].GraphData
+            lineChartData: [{data: chartData, label: 'AP2 Away'}],
+            lineChartLabels: chartLabels
           };
         }
 

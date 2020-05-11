@@ -46,7 +46,7 @@
               </ng-container>
               <ng-container *ngSwitchCase="statisticsService.ColumnGroup.StatisticsData">
                 <div class="table-field-sparkline">
-                  <img src="assets/icons/sparkline-match.png" alt="Sparkline">
+                  <app-bar-chart></app-bar-chart>
                 </div>
               </ng-container>
               <ng-container *ngSwitchDefault>
@@ -57,8 +57,13 @@
                     <span>{{ row[subColumn.name][1] }}</span>
                   </ng-container>
                   <ng-container *ngIf="subColumn.name === 'TotalGraphs1' || subColumn.name === 'TotalGraphs2'">
-                    <span (mouseover)="drawGraph($event, row[subColumn.name][0].value)">{{ row[subColumn.name][0].id }}</span>
-                    <span (mouseover)="drawGraph($event, row[subColumn.name][0].value)">{{ row[subColumn.name][1].id }}</span>
+                    <span [matMenuTriggerFor]="appMenu" #menuTrigger="matMenuTrigger" (mouseenter)="menuTrigger.openMenu();">{{ row[subColumn.name][0].id }}</span>
+                    <mat-menu #appMenu="matMenu">
+                      <span (mouseleave)="menuTrigger.closeMenu();">
+                        <app-line-chart [lineChartData]="row[subColumn.name][0].lineChartData" [lineChartLabels]="row[subColumn.name][0].lineChartLabels"></app-line-chart>
+                      </span>
+                    </mat-menu>
+                    <span>{{ row[subColumn.name][1].id }}</span>
                   </ng-container>
                 </div>
                 <ng-container *ngIf="!isArray(row[subColumn.name])">

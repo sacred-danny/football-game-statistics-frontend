@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { StatisticsService } from '../../core/services/statistics.service';
+import { LineChartComponent} from '../line-chart/line-chart.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-table',
@@ -9,6 +11,7 @@ import { StatisticsService } from '../../core/services/statistics.service';
 })
 export class TableComponent implements OnInit {
   @Input() statisticsIndex: any;
+  @ViewChild(MatMenuTrigger) lineChart: MatMenuTrigger | undefined;
 
   searchForm = new FormGroup({
     searchText: new FormControl(''),
@@ -43,6 +46,5 @@ export class TableComponent implements OnInit {
   }
 
   drawGraph(event: any, value: any) {
-    console.log(value);
   }
 }

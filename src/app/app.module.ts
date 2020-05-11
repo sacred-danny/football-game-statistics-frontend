@@ -20,6 +20,7 @@ import { MainComponent } from './main/main.component';
     HttpClientModule
   ],
   providers: [{ provide: StatisticsService, useClass: EvenStatisticsService }],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

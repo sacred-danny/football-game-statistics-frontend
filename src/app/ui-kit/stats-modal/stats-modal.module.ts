@@ -21,6 +21,7 @@ import { StatsFilterComponent } from './stats-filter/stats-filter.component';
     MatInputModule,
     BrowserAnimationsModule,
   ],
+  // tslint:disable-next-line:max-line-length
   exports: [FormsModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, BrowserAnimationsModule, StatsFilterComponent]
 })
 export class StatsModalModule {
