@@ -50,10 +50,16 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchDefault>
-                <div *ngIf="isArray(row[subColumn.name])" class="table-row-field"
+                <div *ngIf="isArray(row[subColumn.name])" class="table-row-field {{subColumn.name}}"
                      [class.table-flex-start]="row[subColumn.name][2]">
-                  <span>{{ row[subColumn.name][0] }}</span>
-                  <span>{{ row[subColumn.name][1] }}</span>
+                  <ng-container *ngIf="subColumn.name !== 'TotalGraphs1' && subColumn.name !== 'TotalGraphs2'">
+                    <span>{{ row[subColumn.name][0] }}</span>
+                    <span>{{ row[subColumn.name][1] }}</span>
+                  </ng-container>
+                  <ng-container *ngIf="subColumn.name === 'TotalGraphs1' || subColumn.name === 'TotalGraphs2'">
+                    <span (mouseover)="drawGraph($event, row[subColumn.name][0].value)">{{ row[subColumn.name][0].id }}</span>
+                    <span (mouseover)="drawGraph($event, row[subColumn.name][0].value)">{{ row[subColumn.name][1].id }}</span>
+                  </ng-container>
                 </div>
                 <ng-container *ngIf="!isArray(row[subColumn.name])">
                   {{row[subColumn.name]}}

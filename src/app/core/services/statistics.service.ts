@@ -209,8 +209,8 @@ export class StatisticsService {
           TotalPossessions: [res.stats[i].Stats.TotalHomePossession, res.stats[i].Stats.TotalAwayPossession],
           TotalYellowCards: [res.stats[i].Stats.TotalHomeYellowCards, res.stats[i].Stats.TotalHomeYellowCards],
           TotalRedCards: [res.stats[i].Stats.TotalHomeRedCards, res.stats[i].Stats.TotalHomeRedCards],
-          TotalGraphs1: [5, 0],
-          TotalGraphs2: [20, 0],
+          TotalGraphs1: [0, 0],
+          TotalGraphs2: [0, 0],
           ShotsOnTargets: [res.stats[i].Stats.HomeLast10.ShotsOnTarget, res.stats[i].Stats.AwayLast10.ShotsOnTarget],
           ShotsOffTargets: [res.stats[i].Stats.HomeLast10.ShotsOffTarget, res.stats[i].Stats.AwayLast10.ShotsOffTarget],
           ShotsAttacks: [res.stats[i].Stats.HomeLast10.Attacks, res.stats[i].Stats.AwayLast10.Attacks],
@@ -228,6 +228,32 @@ export class StatisticsService {
         temp.OriginalAllStats.TotalYellowCards = parseInt(temp.OriginalAllStats.Stats.TotalHomeYellowCards, 10) + parseInt(temp.OriginalAllStats.Stats.TotalAwayYellowCards, 10);
         // tslint:disable-next-line:max-line-length
         temp.OriginalAllStats.TotalRedCards = parseInt(temp.OriginalAllStats.Stats.TotalHomeRedCards, 10) +  parseInt(temp.OriginalAllStats.Stats.TotalAwayRedCards, 10);
+
+        if (res.stats[i].AttackingPressureGraphsExists === true) {
+          // @ts-ignore
+          temp.TotalGraphs1[0] = {
+            id: res.stats[i].AttackingPressureGraphs[0].GraphTypeId,
+            value: res.stats[i].AttackingPressureGraphs[0].GraphData
+          };
+          // @ts-ignore
+          temp.TotalGraphs1[1] = {
+            id: res.stats[i].AttackingPressureGraphs[2].GraphTypeId,
+            value: res.stats[i].AttackingPressureGraphs[2].GraphData
+          };
+
+          // @ts-ignore
+          temp.TotalGraphs2[0] = {
+            id: res.stats[i].AttackingPressureGraphs[1].GraphTypeId,
+            value: res.stats[i].AttackingPressureGraphs[1].GraphData
+          };
+
+          // @ts-ignore
+          temp.TotalGraphs2[1] = {
+            id: res.stats[i].AttackingPressureGraphs[3].GraphTypeId,
+            value: res.stats[i].AttackingPressureGraphs[3].GraphData
+          };
+        }
+
         this.currentStatistic.push(temp);
       }
       this.formatStatistics(this.currentStatistic);

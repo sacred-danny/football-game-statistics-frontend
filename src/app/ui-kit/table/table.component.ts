@@ -41,4 +41,8 @@ export class TableComponent implements OnInit {
       this.statisticsService.allQuickFilter(this.statisticsIndex);
     }
   }
+
+  drawGraph(event: any, value: any) {
+    console.log(value);
+  }
 }

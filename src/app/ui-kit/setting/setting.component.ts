@@ -46,7 +46,7 @@ export class SettingComponent implements OnInit {
     this.statisticsService.stats[this.statisticsIndex].statsFilterQuery = [];
     this.isStatsFilterClicked = !this.isStatsFilterClicked;
     const dialogRef = this.dialog.open(StatsModalComponent, {
-      width: '70%',
+      width: '50%',
       data: {}
     });
 
