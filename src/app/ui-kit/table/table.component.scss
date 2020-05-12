@@ -31,9 +31,10 @@ $border: 4px solid black;
 
     .table-field-sparkline {
       img {
-        height: 80%;
-        width: 30%;
+        width: 70%;
+        height: 70%;
       }
+      flex: 0 0 400px;
     }
 
     span.group-header {
@@ -67,9 +68,7 @@ $border: 4px solid black;
     }
 
     .table-field-sparkline {
-      img {
-        width: 90%;
-      }
+      flex: 0 0 400px;
     }
 
     .table-row-field {

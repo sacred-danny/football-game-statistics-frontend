@@ -84,9 +84,9 @@ export class StatisticsService {
     },
     {
       group: this.ColumnGroup.StatisticsData,
-      width: '200px',
+      width: '400px',
       columns: [
-        { icon: 'sparkline-header.png', name: '', width: '', group: this.ColumnGroup.StatisticsData, show: true },
+        { icon: 'sparkline-header.png', name: 'SparkLine', width: '', group: this.ColumnGroup.StatisticsData, show: true },
       ],
       show: true
     },
@@ -222,6 +222,7 @@ export class StatisticsService {
           ShotsCorners: [res.stats[i].Stats.HomeLast10.Corners, res.stats[i].Stats.AwayLast10.Corners],
           ShotsGoals: [res.stats[i].Stats.HomeLast10.Goals, res.stats[i].Stats.AwayLast10.Goals],
           ShotsPressureIndex: [res.stats[i].Stats.HomeLast10.PressureIndex, res.stats[i].Stats.AwayLast10.PressureIndex],
+          SparkLine: [],
           matched: false,
           show: true,
           OriginalAllStats: res.stats[i]
@@ -289,6 +290,17 @@ export class StatisticsService {
             lineChartData: [{data: chartData, label: 'AP2 Away'}],
             lineChartLabels: chartLabels
           };
+
+          graphData = JSON.parse(res.stats[i].SparkLineGraph.GraphData);
+          temp.SparkLine = [];
+          for (let j = 0; j < Object.keys(graphData).length; j++) {
+            temp.SparkLine.push({
+              // @ts-ignore
+              name: j + 1,
+              // @ts-ignore
+              value:  graphData[j]
+            });
+          }
         }
 
         this.currentStatistic.push(temp);

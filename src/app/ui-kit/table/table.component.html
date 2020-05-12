@@ -46,7 +46,7 @@
               </ng-container>
               <ng-container *ngSwitchCase="statisticsService.ColumnGroup.StatisticsData">
                 <div class="table-field-sparkline">
-                  <app-bar-chart></app-bar-chart>
+                  <app-bar-chart [single]="row[subColumn.name]"></app-bar-chart>
                 </div>
               </ng-container>
               <ng-container *ngSwitchDefault>
@@ -63,8 +63,23 @@
                         <app-line-chart [lineChartData]="row[subColumn.name][0].lineChartData" [lineChartLabels]="row[subColumn.name][0].lineChartLabels"></app-line-chart>
                       </span>
                     </mat-menu>
-                    <span>{{ row[subColumn.name][1].id }}</span>
+                    <span [matMenuTriggerFor]="appMenu1" #menuTrigger1="matMenuTrigger" (mouseenter)="menuTrigger1.openMenu();">{{ row[subColumn.name][1].id }}</span>
+                    <mat-menu #appMenu1="matMenu">
+                      <span (mouseleave)="menuTrigger1.closeMenu();">
+                        <app-line-chart [lineChartData]="row[subColumn.name][1].lineChartData" [lineChartLabels]="row[subColumn.name][1].lineChartLabels"></app-line-chart>
+                      </span>
+                    </mat-menu>
                   </ng-container>
+
+<!--                  <ng-container *ngIf="subColumn.name === 'TotalGraphs2'">-->
+<!--                    <span [matMenuTriggerFor]="appMenu1" #menuTrigger="matMenuTrigger" (mouseenter)="menuTrigger.openMenu();">{{ row[subColumn.name][0].id }}</span>-->
+<!--                    <mat-menu #appMenu1="matMenu">-->
+<!--                      <span (mouseleave)="menuTrigger.closeMenu();">-->
+<!--                        <app-line-chart [lineChartData]="row[subColumn.name][0].lineChartData" [lineChartLabels]="row[subColumn.name][0].lineChartLabels"></app-line-chart>-->
+<!--                      </span>-->
+<!--                    </mat-menu>-->
+<!--                    <span>{{ row[subColumn.name][1].id }}</span>-->
+<!--                  </ng-container>-->
                 </div>
                 <ng-container *ngIf="!isArray(row[subColumn.name])">
                   {{row[subColumn.name]}}

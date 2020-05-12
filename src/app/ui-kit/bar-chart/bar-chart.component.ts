@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { single } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bar-chart',
@@ -8,20 +11,30 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./bar-chart.component.scss']
 })
 export class BarChartComponent implements OnInit {
+  @Input() single: any;
 
-  barChartOptions: ChartOptions = {
-    responsive: true,
+  view: any[] = [190, 35];
+
+  // options
+  showXAxis = false;
+  showYAxis = false;
+  gradient = false;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = '';
+  showYAxisLabel = false;
+  yAxisLabel = '';
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
-  barChartType: ChartType = 'bar';
-  barChartLegend = true;
-  barChartPlugins = [];
 
-  barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
-  ];
+  constructor() {
+  }
 
-  constructor() { }
+  onSelect(event: any) {
+    console.log(event);
+  }
 
   ngOnInit(): void {
   }
